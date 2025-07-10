@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "nombre": "Camiseta Negra",
+    "precio": 15.99,
+    "categoria": "Ropa",
+    "talla": "M",
+    "imagen": "img/camiseta_negra.jpg"
+  },
+  {
+    "id": 2,
+    "nombre": "Pantalón Azul",
+    "precio": 25.5,
+    "categoria": "Ropa",
+    "talla": "L",
+    "imagen": "img/pantalon_azul.jpg"
+  }
+]

@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Carrito de Compras</title>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <header>
+    <h1>Mi Carrito</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="carrito.html">Carrito</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="carrito-contenido"></main>
+  <div id="resumen">
+    <p>Total: $<span id="total">0.00</span></p>
+    <button id="vaciar" onclick="vaciarCarrito()">Vaciar Carrito</button>
+    <button id="pagar" onclick="pagar()">Pagar</button>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Mi Tienda</p>
+  </footer>
+
+  <script>
+    const carrito = JSON.parse(localStorage.getItem("carrito") || "[]");
+    const contenedor = document.getElementById("carrito-contenido");
+    const totalSpan = document.getElementById("total");
+
+    function actualizarCarrito() {
+      contenedor.innerHTML = "";
+      let total = 0;
+      carrito.forEach(p => {
+        const div = document.createElement("div");
+        div.innerHTML = `<h3>${p.nombre}</h3><p>Precio: $${p.precio}</p>`;
+        contenedor.appendChild(div);
+        total += p.precio;
+      });
+      totalSpan.textContent = total.toFixed(2);
+      document.getElementById("pagar").style.display = carrito.length > 0 ? "inline" : "none";
+    }
+
+    function vaciarCarrito() {
+      localStorage.removeItem("carrito");
+      location.reload();
+    }
+
+    function pagar() {
+      const tarjeta = prompt("Introduce los 16 dígitos de tu tarjeta (ficticia):");
+      if (!/^[0-9]{16}$/.test(tarjeta)) {
+        alert("Tarjeta inválida. Solo se permiten 16 dígitos numéricos.");
+        return;
+      }
+      alert("Pago procesado exitosamente.");
+      vaciarCarrito();
+    }
+
+    actualizarCarrito();
+  </script>
+</body>
+</html>
